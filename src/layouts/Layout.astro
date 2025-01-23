@@ -1,0 +1,268 @@
+---
+// Importaciones de estilos y dependencias globales
+import '../styles/globals.css';
+import 'tailwindcss/tailwind.css';
+import 'swiper/css';
+import 'swiper/css/navigation';
+import 'swiper/css/pagination'; 
+import Loader from '../components/Loader.astro';
+
+// Definición de propiedades para el Layout
+interface Props {
+    title: string;
+    description?: string;
+    keywords?: string;
+}
+
+// Destructuración de propiedades con valores por defecto
+const { 
+    title = 'LCA Carpintería', 
+    description = 'Servicios profesionales de carpintería artesanal', 
+    keywords = 'carpintería, muebles, diseño, artesanal' 
+} = Astro.props;
+---
+
+<!doctype html>
+<html lang="es">
+    <head>
+        {/* Metadatos y configuraciones principales del documento */}
+        <meta charset="UTF-8" />
+        <meta name="description" content={description} />
+        <meta name="viewport" content="width=device-width" />
+        
+        {/* Favicon y recursos estáticos */}
+        <link rel="icon" type="image/png" href="/LCA.png">
+        <link rel="apple-touch-icon" href="/LCA.png">
+        <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+        
+        {/* Optimización de carga de fuentes */}
+        <link rel="preload" href="https://api.fontshare.com/v2/css?f[]=satoshi@0,1,700,701,400,401,500,501&display=swap" as="style">
+        <link 
+            rel="stylesheet" 
+            href="https://api.fontshare.com/v2/css?f[]=satoshi@0,1,700,701,400,401,500,501&display=swap" 
+            media="print" 
+            onload="this.media='all'; this.onload=null;"
+        >
+        <noscript>
+            <link rel="stylesheet" href="https://api.fontshare.com/v2/css?f[]=satoshi@0,1,700,701,400,401,500,501&display=swap">
+        </noscript>
+        
+        {/* Estrategia de font-display */}
+        <style>
+            @font-face {
+                font-family: 'Satoshi';
+                src: url('https://api.fontshare.com/v2/css?f[]=satoshi@0,1,700,701,400,401,500,501&display=swap') format('woff2');
+                font-weight: 400 700;
+                font-display: swap;
+                font-style: normal;
+            }
+        </style>
+        
+        {/* Preconexiones y recursos externos */}
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css" />
+        
+        {/* Estilos para Swiper */}
+        <style>
+            .swiper {
+                width: 100%;
+                height: 400px;
+            }
+            .swiper-slide {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+            .swiper-slide img {
+                max-width: 100%;
+                max-height: 100%;
+                object-fit: cover;
+            }
+        </style>
+        
+        <title>{title}</title>
+        
+        {/* Librerías de animación */}
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    </head>
+    
+    <body class="bg-white/80 backdrop-blur-xl text-gray-900 min-h-screen font-sans">
+        <Loader />       
+        {/* Slot para contenido dinámico de páginas */}
+        <slot />                
+        
+
+        {/* Carga de scripts externos */}
+        <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
+        
+        {/* Script de carga dinámica de contenido */}
+        <script is:inline>
+            (function() {
+                function initDynamicContentLoading() {
+                    // Hacer visibles los elementos del hero inmediatamente
+                    const heroElements = document.querySelectorAll('.hero-wrapper .fade-enter');
+                    heroElements.forEach(element => {
+                        element.classList.add('visible');
+                    });
+
+                    // Lazy loading de imágenes
+                    const lazyImages = document.querySelectorAll('img.lazy-load');
+                    
+                    if ('IntersectionObserver' in window) {
+                        const imageObserver = new IntersectionObserver((entries, observer) => {
+                            entries.forEach(entry => {
+                                if (entry.isIntersecting) {
+                                    const img = entry.target;
+                                    
+                                    // Cargar imagen si tiene data-src
+                                    if (img.dataset.src) {
+                                        img.src = img.dataset.src;
+                                        delete img.dataset.src;
+                                    }
+                                    
+                                    // Añadir clase de carga
+                                    img.classList.add('loaded');
+                                    
+                                    // Dejar de observar esta imagen
+                                    observer.unobserve(img);
+                                }
+                            });
+                        }, {
+                            rootMargin: '50px 0px',
+                            threshold: 0.01
+                        });
+
+                        lazyImages.forEach(img => imageObserver.observe(img));
+                    }
+
+                    // Revelar contenedores suaves
+                    const smoothContainers = document.querySelectorAll('.smooth-container');
+                    
+                    if ('IntersectionObserver' in window) {
+                        const containerObserver = new IntersectionObserver((entries) => {
+                            entries.forEach(entry => {
+                                if (entry.isIntersecting) {
+                                    entry.target.classList.add('visible');
+                                    
+                                    // Hacer visibles los elementos fade-enter dentro del contenedor
+                                    const fadeElements = entry.target.querySelectorAll('.fade-enter');
+                                    fadeElements.forEach(el => el.classList.add('visible'));
+                                }
+                            });
+                        }, {
+                            threshold: 0.1
+                        });
+
+                        smoothContainers.forEach(container => containerObserver.observe(container));
+                    }
+
+                    // Detección de carga de fuentes
+                    if ('fonts' in document) {
+                        document.fonts.ready.then(() => {
+                            // Añadir clase cuando las fuentes están cargadas
+                            document.body.classList.add('fonts-loaded');
+                        });
+                    }
+                }
+
+                // Inicializar cuando el DOM esté listo
+                if (document.readyState === 'loading') {
+                    document.addEventListener('DOMContentLoaded', initDynamicContentLoading);
+                } else {
+                    initDynamicContentLoading();
+                }
+
+                // Performance monitoring
+                if (window.performance) {
+                    // Marca de inicio de carga de página
+                    performance.mark('pageLoad-start');
+
+                    window.addEventListener('load', () => {
+                        // Marca de fin de carga de página
+                        performance.mark('pageLoad-end');
+                        performance.measure('pageLoad', 'pageLoad-start', 'pageLoad-end');
+                        
+                        const loadMeasure = performance.getEntriesByName('pageLoad')[0];
+                        console.log(`🚀 Tiempo de carga: ${loadMeasure.duration.toFixed(2)}ms`);
+                    });
+                }
+            })();
+        </script>
+        
+        {/* Script de animaciones de scroll */}
+        <script is:inline>
+            (function() {
+                function initScrollAnimations() {
+                    // Hero scaling (if elements exist)
+                    const heroSection = document.getElementById('hero-section');
+                    const heroImageContainer = document.getElementById('hero-image-container');
+
+                    if (heroSection && heroImageContainer) {
+                        function updateHeroScale() {
+                            const scrollY = window.scrollY;
+                            const windowHeight = window.innerHeight;
+                            const progress = Math.min(scrollY / windowHeight, 1);
+                            const scale = 1 - progress * 0.2;
+
+                            requestAnimationFrame(() => {
+                                heroSection.style.transform = `scale(${scale})`;
+                                heroImageContainer.style.transform = `scale(${scale})`;
+                            });
+                        }
+
+                        // Throttle scroll event
+                        let ticking = false;
+                        window.addEventListener('scroll', () => {
+                            if (!ticking) {
+                                window.requestAnimationFrame(() => {
+                                    updateHeroScale();
+                                    ticking = false;
+                                });
+                                ticking = true;
+                            }
+                        });
+                    }
+
+                    // Scroll reveal for sections
+                    const scrollElements = document.querySelectorAll('section, .scroll-reveal');
+                    const scrollObserver = new IntersectionObserver((entries) => {
+                        entries.forEach(entry => {
+                            if (entry.isIntersecting) {
+                                entry.target.classList.add('is-visible');
+                            }
+                        });
+                    }, { threshold: 0.1 });
+
+                    scrollElements.forEach(el => scrollObserver.observe(el));
+                }
+
+                // Ensure DOM is fully loaded before running animations
+                if (document.readyState === 'loading') {
+                    document.addEventListener('DOMContentLoaded', initScrollAnimations);
+                } else {
+                    initScrollAnimations();
+                }
+            })();
+        </script>
+    </body>
+</html>
+
+{/* Estilos globales para variables de color y fuentes */}
+<style is:global>
+    :root {
+        --accent: 136, 58, 234;
+        --accent-light: 224, 204, 250;
+        --accent-dark: 49, 10, 101;
+        --accent-gradient: linear-gradient(
+            45deg,
+            rgb(var(--accent)),
+            rgb(var(--accent-light)) 30%,
+            white 60%
+        );
+    }
+    html {
+        font-family: 'Satoshi', sans-serif;
+    }
+</style>
