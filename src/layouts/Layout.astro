@@ -36,15 +36,18 @@ const {
         <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
         
         {/* Optimización de carga de fuentes */}
-        <link rel="preload" href="https://api.fontshare.com/v2/css?f[]=satoshi@0,1,700,701,400,401,500,501&display=swap" as="style">
+        <link rel="preconnect" href="https://api.fontshare.com">
         <link 
             rel="stylesheet" 
             href="https://api.fontshare.com/v2/css?f[]=satoshi@0,1,700,701,400,401,500,501&display=swap" 
             media="print" 
-            onload="this.media='all'; this.onload=null;"
-        >
+            onload="this.media='all'"
+        />
         <noscript>
-            <link rel="stylesheet" href="https://api.fontshare.com/v2/css?f[]=satoshi@0,1,700,701,400,401,500,501&display=swap">
+            <link 
+                rel="stylesheet" 
+                href="https://api.fontshare.com/v2/css?f[]=satoshi@0,1,700,701,400,401,500,501&display=swap"
+            />
         </noscript>
         
         {/* Estrategia de font-display */}
@@ -83,12 +86,26 @@ const {
         
         <title>{title}</title>
         
+        {/* Coolors Palette Widget */}
+        <script src="https://coolors.co/palette-widget/widget.js"></script>
+        <script data-id="05786209326339431">new CoolorsPaletteWidget("05786209326339431", ["0b090a","161a1d","660708","a4161a","ba181b","e5383b","b1a7a6","d3d3d3","f5f3f4","ffffff"]); </script>
+        
         {/* Librerías de animación */}
         <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+        
+        {/* Librerías de animación con inicialización segura */}
+        <script is:inline>
+            // Inicialización segura de GSAP y ScrollTrigger
+            window.addEventListener('load', () => {
+                if (window.gsap && window.ScrollTrigger) {
+                    window.gsap.registerPlugin(window.ScrollTrigger);
+                }
+            });
+        </script>
     </head>
     
-    <body class="bg-white/80 backdrop-blur-xl text-gray-900 min-h-screen font-sans">
+    <body class="bg-white_smoke-500 backdrop-blur-xl text-eerie_black-500 min-h-screen font-sans">
         <Loader />       
         {/* Slot para contenido dinámico de páginas */}
         <slot />                
@@ -96,6 +113,30 @@ const {
 
         {/* Carga de scripts externos */}
         <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
+        
+        {/* Script para inicialización segura de Swiper */}
+        <script is:inline>
+            document.addEventListener('DOMContentLoaded', () => {
+                const swiperElements = document.querySelectorAll('.swiper');
+                
+                swiperElements.forEach(swiperEl => {
+                    const slides = swiperEl.querySelectorAll('.swiper-slide');
+                    
+                    // Si hay pocos slides, ajustar configuración
+                    if (slides.length < 3) {
+                        const swiperInstance = new Swiper(swiperEl, {
+                            slidesPerView: 1,
+                            spaceBetween: 10,
+                            loop: false, // Deshabilitar loop si hay pocos slides
+                            navigation: {
+                                nextEl: '.swiper-button-next',
+                                prevEl: '.swiper-button-prev',
+                            },
+                        });
+                    }
+                });
+            });
+        </script>
         
         {/* Script de carga dinámica de contenido */}
         <script is:inline>
@@ -191,61 +232,70 @@ const {
             })();
         </script>
         
-        {/* Script de animaciones de scroll */}
-        <script is:inline>
-            (function() {
-                function initScrollAnimations() {
-                    // Hero scaling (if elements exist)
-                    const heroSection = document.getElementById('hero-section');
-                    const heroImageContainer = document.getElementById('hero-image-container');
+        <style is:global>
+            /* Scroll suave y elegante */
+            html {
+                scroll-behavior: smooth;
+                scroll-padding-top: 4rem;
+                overflow-x: hidden;
+                max-width: 100%;
+                margin: 0;
+                padding: 0;
+            }
 
-                    if (heroSection && heroImageContainer) {
-                        function updateHeroScale() {
-                            const scrollY = window.scrollY;
-                            const windowHeight = window.innerHeight;
-                            const progress = Math.min(scrollY / windowHeight, 1);
-                            const scale = 1 - progress * 0.2;
+            body {
+                overflow-x: hidden;
+                max-width: 100%;
+                margin: 0;
+                padding: 0;
+            }
 
-                            requestAnimationFrame(() => {
-                                heroSection.style.transform = `scale(${scale})`;
-                                heroImageContainer.style.transform = `scale(${scale})`;
-                            });
-                        }
+            /* Eliminar scroll horizontal en contenedores */
+            .container {
+                max-width: 100%;
+                overflow-x: hidden;
+                padding-left: 1rem;
+                padding-right: 1rem;
+            }
 
-                        // Throttle scroll event
-                        let ticking = false;
-                        window.addEventListener('scroll', () => {
-                            if (!ticking) {
-                                window.requestAnimationFrame(() => {
-                                    updateHeroScale();
-                                    ticking = false;
-                                });
-                                ticking = true;
-                            }
-                        });
-                    }
+            /* Asegurar que las imágenes y elementos no generen scroll */
+            img, video, iframe {
+                max-width: 100%;
+                height: auto;
+            }
+        </style>
 
-                    // Scroll reveal for sections
-                    const scrollElements = document.querySelectorAll('section, .scroll-reveal');
-                    const scrollObserver = new IntersectionObserver((entries) => {
-                        entries.forEach(entry => {
-                            if (entry.isIntersecting) {
-                                entry.target.classList.add('is-visible');
-                            }
-                        });
-                    }, { threshold: 0.1 });
+        <style is:global>
+            /* Scrollbar minimalista */
+            ::-webkit-scrollbar {
+                @apply w-1.5 bg-transparent;
+            }
+            ::-webkit-scrollbar-thumb {
+                @apply bg-gray-300 rounded-full;
+            }
 
-                    scrollElements.forEach(el => scrollObserver.observe(el));
-                }
+            /* Efecto de revelación suave */
+            .reveal {
+                opacity: 1;
+                transform: translateY(0);
+            }
 
-                // Ensure DOM is fully loaded before running animations
-                if (document.readyState === 'loading') {
-                    document.addEventListener('DOMContentLoaded', initScrollAnimations);
-                } else {
-                    initScrollAnimations();
-                }
-            })();
-        </script>
+            .text-reveal {
+                @apply opacity-100 translate-y-0;
+            }
+
+            /* Efecto de selección refinado */
+            ::selection {
+                @apply bg-gray-200 text-black bg-opacity-50;
+            }
+        </style>
+
+        <style is:global>
+            /* Estilos minimalistas */
+            .elegant-transition {
+                @apply duration-0;
+            }
+        </style>
     </body>
 </html>
 

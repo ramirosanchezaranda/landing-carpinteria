@@ -14,14 +14,14 @@ import { Navigation, Pagination, Autoplay } from 'swiper/modules';
         - Contiene logo, enlaces de navegación y botón de menú móvil
         - Implementa efecto de sticky y cambio de fondo al hacer scroll
     */}
-    <nav class="fixed top-0 left-0 w-full bg-white/80 backdrop-blur-sm z-50 shadow-sm transition-all duration-300 ease-in-out">
+    <nav class="fixed top-0 left-0 w-full bg-white_smoke-500 backdrop-blur-sm z-50 shadow-sm transition-all duration-300 ease-in-out">
         <div class="container mx-auto px-4 py-3 flex justify-between items-center">
             <div class="absolute left-4 top-1/2 transform -translate-y-1/2 flex items-center">
                 <a href="/" class="block mr-4">
                     <img 
                         src="/lca-navbar.png" 
                         alt="LCA Carpintería Logo" 
-                        class="w-16 h-16 object-cover lazy-load shadow-lg transition-transform duration-300 hover:scale-110"
+                        class="w-16 h-16 object-cover"
                     />
                 </a>
             </div>
@@ -30,19 +30,19 @@ import { Navigation, Pagination, Autoplay } from 'swiper/modules';
             <div class="hidden md:flex space-x-6 ml-auto">
                 <a 
                     href="#inicio" 
-                    class="text-gray-900 hover:text-blue-600 transition duration-300 font-semibold hover-color"
+                    class="text-white hover:text-[#e5383b] transition-all duration-500 hover:underline hover:font-bold"
                 >
                     Inicio
                 </a>
                 <a 
                     href="#galeria" 
-                    class="text-gray-900 hover:text-blue-600 transition duration-300 font-semibold hover-color"
+                    class="text-white hover:text-[#e5383b] transition-all duration-500 hover:underline hover:font-bold"
                 >
                     Proyectos
                 </a>
                 <a 
                     href="#contacto" 
-                    class="text-gray-900 hover:text-blue-600 transition duration-300 font-semibold hover-color"
+                    class="text-white hover:text-[#e5383b] transition-all duration-500 hover:underline hover:font-bold"
                 >
                     Contacto
                 </a>
@@ -52,7 +52,7 @@ import { Navigation, Pagination, Autoplay } from 'swiper/modules';
             <div class="md:hidden ml-auto">
                 <button 
                     id="mobile-menu-toggle" 
-                    class="text-gray-900 focus:outline-none"
+                    class="text-eerie_black-500 focus:outline-none"
                 >
                     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
@@ -64,24 +64,24 @@ import { Navigation, Pagination, Autoplay } from 'swiper/modules';
         {/* Mobile Menu Dropdown */}
         <div 
             id="mobile-menu" 
-            class="fixed top-20 left-0 w-full bg-white/95 backdrop-blur-sm shadow-md transform -translate-x-full transition-transform duration-300 ease-in-out will-change-transform md:hidden"
+            class="fixed top-20 left-0 w-full bg-white_smoke-500 backdrop-blur-sm shadow-md transform -translate-x-full transition-transform duration-300 ease-in-out will-change-transform md:hidden"
         >
             <div class="container mx-auto px-4 py-4 space-y-4">
                 <a 
                     href="#inicio" 
-                    class="block text-gray-900 hover:text-blue-600 transition duration-300 font-semibold text-center py-2 hover-color"
+                    class="block text-white hover:text-[#e5383b] transition-all duration-500 hover:underline hover:font-bold text-center py-2"
                 >
                     Inicio
                 </a>
                 <a 
                     href="#galeria" 
-                    class="block text-gray-900 hover:text-blue-600 transition duration-300 font-semibold text-center py-2 hover-color"
+                    class="block text-white hover:text-[#e5383b] transition-all duration-500 hover:underline hover:font-bold text-center py-2"
                 >
                     Proyectos
                 </a>
                 <a 
                     href="#contacto" 
-                    class="block text-gray-900 hover:text-blue-600 transition duration-300 font-semibold text-center py-2 hover-color"
+                    class="block text-white hover:text-[#e5383b] transition-all duration-500 hover:underline hover:font-bold text-center py-2"
                 >
                     Contacto
                 </a>
@@ -139,11 +139,11 @@ import { Navigation, Pagination, Autoplay } from 'swiper/modules';
                 const heroHeight = heroSection.offsetHeight;
 
                 if (scrollY > 50) {
-                    navbar.classList.add('bg-white', 'shadow-md');
-                    navbar.classList.remove('bg-white/80', 'backdrop-blur-sm');
+                    navbar.classList.add('bg-white_smoke-500', 'shadow-md');
+                    navbar.classList.remove('bg-white_smoke-500', 'backdrop-blur-sm');
                 } else {
-                    navbar.classList.remove('bg-white', 'shadow-md');
-                    navbar.classList.add('bg-white/80', 'backdrop-blur-sm');
+                    navbar.classList.remove('bg-white_smoke-500', 'shadow-md');
+                    navbar.classList.add('bg-white_smoke-500', 'backdrop-blur-sm');
                 }
             };
 
@@ -154,32 +154,29 @@ import { Navigation, Pagination, Autoplay } from 'swiper/modules';
     </script>
 
     {/* 
-        Sección Hero: Introducción principal del sitio web
+        Sección Hero sin animaciones
         - Contiene imagen de fondo, título principal y llamado a la acción
-        - Implementa efecto parallax para profundidad visual
     */}
-    <div id="inicio" class="hero-wrapper relative h-screen w-full overflow-hidden pt-20 smooth-container">
-        <div id="hero-image-container" class="absolute inset-0 z-0 transition-all duration-300 ease-out">
-            <img 
-                id="hero-image" 
-                src="/mesa-rack.webp" 
-                alt="Carpintería Profesional Hero Image" 
-                class="w-full h-full object-cover transform transition-transform duration-300 lazy-load"
-            />
-            <div class="absolute inset-0 bg-black/50 backdrop-brightness-50"></div>
-        </div>
+    <div id="inicio" class="relative h-screen flex items-center justify-center overflow-hidden">
+        <img 
+            id="hero-image" 
+            src="/mesa-rack.webp" 
+            alt="Carpintería Profesional Hero Image" 
+            class="w-full h-full object-cover"
+        />
+        <div class="absolute inset-0 bg-black/40 backdrop-brightness-75"></div>
         
-        <div class="relative z-10 h-full flex flex-col justify-center items-center text-center text-white px-4 md:px-8 lg:px-16">
-            <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 max-w-4xl leading-tight drop-shadow-lg fade-enter">
+        <div class="absolute z-10 text-center text-white px-4 md:px-8 lg:px-16">
+            <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 max-w-4xl leading-tight">
                 Transformamos Madera con Pasión y Precisión
             </h1>
-            <p class="text-lg md:text-xl lg:text-2xl mb-10 max-w-3xl drop-shadow-md fade-enter">
+            <p class="text-lg md:text-xl lg:text-2xl mb-10 max-w-3xl mx-auto">
                 Soluciones personalizadas que dan vida a tus espacios, desde muebles únicos hasta diseños a medida.
             </p>
-            <div class="flex space-x-4 fade-enter">
+            <div class="flex justify-center space-x-4">
                 <a 
                     href="#contacto" 
-                    class="px-8 py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-full transition-all duration-300 ease-in-out"
+                    class="px-8 py-3 bg-[#660708] text-white rounded-full"
                 >
                     Contáctanos
                 </a>
@@ -187,44 +184,20 @@ import { Navigation, Pagination, Autoplay } from 'swiper/modules';
         </div>
     </div>
 
-    <script>
-        // Efecto parallax para la sección hero
-        const heroImageContainer = document.getElementById('hero-image-container');
-        const heroSection = document.getElementById('inicio');
-
-        const handleParallaxScroll = () => {
-            if (!heroImageContainer || !heroSection) return;
-
-            const scrollY = window.scrollY;
-            const heroHeight = heroSection.offsetHeight;
-
-            // Efecto parallax: movimiento más lento de la imagen al hacer scroll
-            const parallaxValue = scrollY * 0.5; // Ajustar este multiplicador para más o menos efecto
-            heroImageContainer.style.transform = `translateY(${parallaxValue}px) scale(${1 + scrollY * 0.0005})`;
-
-            // Desvanecimiento del contenido del hero al hacer scroll
-            const heroContent = document.querySelector('#inicio .relative.z-10');
-            if (heroContent) {
-                const opacity = Math.max(0, 1 - (scrollY / heroHeight));
-                (heroContent as HTMLElement).style.opacity = opacity.toString();
-            }
-        };
-
-        window.addEventListener('scroll', handleParallaxScroll);
-    </script>
-
     {/* 
         Sección de Servicios: Presentación de servicios ofrecidos
         - Contiene título, descripción y enlaces a secciones específicas
     */}
-    <section class="bg-white py-16 lg:py-24">
+    <section class="bg-white_smoke-500 py-16 lg:py-24">
         <div class="container mx-auto px-4 grid lg:grid-cols-2 gap-12 items-center">
             <div class="order-2 lg:order-1">
-                <h2 class="text-3xl lg:text-4xl font-bold mb-6 text-gray-800">Mesa Rack: Diseño y Funcionalidad</h2>
-                <p class="text-lg text-gray-600 mb-6">
+                <h2 class="text-3xl lg:text-4xl font-bold mb-6 text-eerie_black-500">
+                    Mesa Rack: Diseño y Funcionalidad
+                </h2>
+                <p class="text-lg text-eerie_black-500 mb-6">
                     Nuestro Mesa Rack es un ejemplo perfecto de cómo combinamos estética y practicidad. Diseñado para adaptarse a diversos espacios, este mueble no solo es una pieza decorativa, sino también una solución inteligente de almacenamiento.
                 </p>
-                <ul class="space-y-4 mb-8 text-gray-700">
+                <ul class="space-y-4 mb-8 text-eerie_black-500">
                     <li class="flex items-center">
                         <svg class="w-6 h-6 mr-3 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
@@ -246,7 +219,7 @@ import { Navigation, Pagination, Autoplay } from 'swiper/modules';
                 </ul>
                 <a 
                     href="#contacto" 
-                    class="inline-block px-8 py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-full transition duration-300 ease-in-out transform hover:scale-105 shadow-lg hover-scale"
+                    class="inline-block px-8 py-3 bg-[#660708] hover:bg-[#a4161a] text-white rounded-full transition duration-500 ease-in-out transform hover:scale-110"
                 >
                     Consultar Producto
                 </a>
@@ -255,23 +228,23 @@ import { Navigation, Pagination, Autoplay } from 'swiper/modules';
                 <img 
                     src="/mesa-rack.webp" 
                     alt="Mesa Rack Detalle" 
-                    class="w-full rounded-lg shadow-2xl transform transition duration-500 hover:scale-105"
+                    class="w-full rounded-lg shadow-2xl"
                 />
             </div>
         </div>
     </section>
 
     {/* 
-        Sección de Proyectos: Presentación de proyectos destacados
+        Sección de Proyectos sin animaciones
         - Contiene título, descripción y carrusel de imágenes
     */}
-    <section id="proyectos" class="bg-white py-16 lg:py-24 smooth-container">
+    <section id="proyectos" class="bg-white_smoke-500 py-16 lg:py-24">
         <div class="container mx-auto px-4">
             <div class="text-center mb-12">
-                <h2 class="text-3xl lg:text-4xl font-bold mb-4 text-gray-800 fade-enter">
-                    Nuestros Proyectos Destacados
+                <h2 class="text-3xl lg:text-4xl font-bold mb-4 text-eerie_black-500">
+                    Nuestros Proyectos Estándar
                 </h2>
-                <p class="text-lg text-gray-600 max-w-3xl mx-auto fade-enter">
+                <p class="text-lg text-eerie_black-500 max-w-3xl mx-auto">
                     Cada proyecto es único. Descubre cómo transformamos la madera en obras maestras funcionales y elegantes.
                 </p>
             </div>
@@ -283,11 +256,15 @@ import { Navigation, Pagination, Autoplay } from 'swiper/modules';
                             <img 
                                 src="/escritorio.webp" 
                                 alt="Escritorio de Madera" 
-                                class="w-full h-64 object-cover lazy-load"
+                                class="w-full h-64 object-cover"
                             />
                             <div class="p-6">
-                                <h3 class="text-xl font-semibold mb-2 text-gray-800">Escritorio Minimalista</h3>
-                                <p class="text-gray-600">Diseño moderno que combina funcionalidad y estética.</p>
+                                <h3 class="text-xl font-semibold mb-2 text-eerie_black-500">
+                                    Escritorio Minimalista
+                                </h3>
+                                <p class="text-eerie_black-500">
+                                    Diseño moderno que combina funcionalidad y estética.
+                                </p>
                             </div>
                         </div>
                     </div>
@@ -296,11 +273,15 @@ import { Navigation, Pagination, Autoplay } from 'swiper/modules';
                             <img 
                                 src="/mesa-rack.webp" 
                                 alt="Mesa Rack" 
-                                class="w-full h-64 object-cover lazy-load"
+                                class="w-full h-64 object-cover"
                             />
                             <div class="p-6">
-                                <h3 class="text-xl font-semibold mb-2 text-gray-800">Mesa Rack Industrial</h3>
-                                <p class="text-gray-600">Diseño robusto que fusiona funcionalidad industrial con elegancia.</p>
+                                <h3 class="text-xl font-semibold mb-2 text-eerie_black-500">
+                                    Mesa Rack Industrial
+                                </h3>
+                                <p class="text-eerie_black-500">
+                                    Diseño robusto que fusiona funcionalidad industrial con elegancia.
+                                </p>
                             </div>
                         </div>
                     </div>
@@ -309,11 +290,15 @@ import { Navigation, Pagination, Autoplay } from 'swiper/modules';
                             <img 
                                 src="/mesalampara1.webp" 
                                 alt="Mesa Lámpara" 
-                                class="w-full h-64 object-cover lazy-load"
+                                class="w-full h-64 object-cover"
                             />
                             <div class="p-6">
-                                <h3 class="text-xl font-semibold mb-2 text-gray-800">Mesa Lámpara Vintage</h3>
-                                <p class="text-gray-600">Pieza única que combina iluminación y diseño artesanal.</p>
+                                <h3 class="text-xl font-semibold mb-2 text-eerie_black-500">
+                                    Mesa Lámpara Vintage
+                                </h3>
+                                <p class="text-eerie_black-500">
+                                    Pieza única que combina iluminación y diseño artesanal.
+                                </p>
                             </div>
                         </div>
                     </div>
@@ -365,23 +350,37 @@ import { Navigation, Pagination, Autoplay } from 'swiper/modules';
     </script>
 
     {/* 
-        Sección de Galería: Presentación de imágenes de proyectos
+        Sección de Galería sin animaciones
         - Contiene título y carrusel de imágenes
     */}
-    <section id="galeria" class="bg-gray-100 py-16 lg:py-24">
+    <section id="galeria" class="bg-white_smoke-100 py-16 lg:py-24">
         <div class="container mx-auto px-4">
-            <h2 class="text-4xl font-bold mb-8 text-center scroll-reveal">Proyectos Destacados</h2>
+            <h2 class="text-4xl font-bold mb-8 text-center text-eerie_black-500">
+                Proyectos Destacados
+            </h2>
             
             <div class="swiper">
                 <div class="swiper-wrapper">
                     <div class="swiper-slide">
-                        <img src="/escritorio.webp" alt="Escritorio de Madera" class="rounded-lg shadow-lg">
+                        <img 
+                            src="/escritorio.webp" 
+                            alt="Escritorio de Madera" 
+                            class="w-full rounded-lg shadow-2xl"
+                        />
                     </div>
                     <div class="swiper-slide">
-                        <img src="/mesa-rack.webp" alt="Mesa Rack" class="rounded-lg shadow-lg">
+                        <img 
+                            src="/mesa-rack.webp" 
+                            alt="Mesa Rack" 
+                            class="w-full rounded-lg shadow-2xl"
+                        />
                     </div>
                     <div class="swiper-slide">
-                        <img src="/mesalampara1.webp" alt="Mesa Lámpara" class="rounded-lg shadow-lg">
+                        <img 
+                            src="/mesalampara1.webp" 
+                            alt="Mesa Lámpara" 
+                            class="w-full rounded-lg shadow-2xl"
+                        />
                     </div>
                 </div>
                 
@@ -433,29 +432,29 @@ import { Navigation, Pagination, Autoplay } from 'swiper/modules';
     </script>
 
     {/* 
-        Sección de Contacto: Formulario de contacto y redes sociales
+        Sección de Contacto sin animaciones
         - Contiene título, formulario de contacto y enlaces a redes sociales
     */}
-    <section id="contacto" class="bg-gray-100 py-16">
+    <section id="contacto" class="bg-white_smoke-100 py-16">
         <div class="container mx-auto px-4 grid md:grid-cols-2 gap-12">
-            <div class="bg-white shadow-lg rounded-lg p-8">
-                <h2 class="text-3xl font-bold mb-6 text-center text-gray-800">Contáctanos</h2>
+            <div class="bg-white_smoke-500 shadow-lg rounded-lg p-8">
+                <h2 class="text-3xl font-bold mb-6 text-center text-eerie_black-500">
+                    Contáctanos
+                </h2>
                 <form 
                     action="https://formspree.io/f/mleqzglb" 
                     method="POST" 
-                    id="contactForm"
-                    class="max-w-lg mx-auto bg-white p-8 rounded-lg shadow-lg"
+                    class="max-w-lg mx-auto bg-white_smoke-500 p-8 rounded-lg shadow-lg"
                 >
                     <div class="mb-4">
                         <label 
                             for="name" 
-                            class="block text-gray-700 text-sm font-bold mb-2"
+                            class="block text-eerie_black-500 text-sm font-bold mb-2"
                         >
                             Nombre Completo
                         </label>
                         <input 
                             type="text" 
-                            id="name" 
                             name="name" 
                             required 
                             placeholder="Tu nombre" 
@@ -466,13 +465,12 @@ import { Navigation, Pagination, Autoplay } from 'swiper/modules';
                     <div class="mb-4">
                         <label 
                             for="email" 
-                            class="block text-gray-700 text-sm font-bold mb-2"
+                            class="block text-eerie_black-500 text-sm font-bold mb-2"
                         >
                             Correo Electrónico
                         </label>
                         <input 
                             type="email" 
-                            id="email" 
                             name="email" 
                             required 
                             placeholder="tu@email.com" 
@@ -483,13 +481,12 @@ import { Navigation, Pagination, Autoplay } from 'swiper/modules';
                     <div class="mb-4">
                         <label 
                             for="phone" 
-                            class="block text-gray-700 text-sm font-bold mb-2"
+                            class="block text-eerie_black-500 text-sm font-bold mb-2"
                         >
                             Teléfono (Opcional)
                         </label>
                         <input 
                             type="tel" 
-                            id="phone" 
                             name="phone" 
                             placeholder="Tu número de teléfono" 
                             class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
@@ -499,12 +496,11 @@ import { Navigation, Pagination, Autoplay } from 'swiper/modules';
                     <div class="mb-4">
                         <label 
                             for="message" 
-                            class="block text-gray-700 text-sm font-bold mb-2"
+                            class="block text-eerie_black-500 text-sm font-bold mb-2"
                         >
                             Mensaje
                         </label>
                         <textarea 
-                            id="message" 
                             name="message" 
                             required 
                             rows="4" 
@@ -521,7 +517,7 @@ import { Navigation, Pagination, Autoplay } from 'swiper/modules';
                                 required 
                                 class="mr-2 rounded text-blue-600 focus:ring-blue-500"
                             />
-                            <span class="text-sm text-gray-600">
+                            <span class="text-sm text-eerie_black-500">
                                 Acepto la política de privacidad y tratamiento de datos
                             </span>
                         </label>
@@ -531,114 +527,46 @@ import { Navigation, Pagination, Autoplay } from 'swiper/modules';
                     
                     <button 
                         type="submit" 
-                        class="w-full bg-blue-600 text-white py-3 rounded-md hover:bg-blue-700 transition duration-300 ease-in-out"
+                        class="w-full bg-[#0b090a] text-[#e5383b] font-bold py-4 px-6 rounded-xl"
                     >
                         Enviar Mensaje
                     </button>
                 </form>
-
-                <script>
-                    // Manejo del formulario de contacto
-                    document.addEventListener('DOMContentLoaded', () => {
-                        const form = document.getElementById('contactForm');
-                        const formStatus = document.getElementById('formStatus');
-
-                        if (!form || !formStatus) return;
-
-                        form.addEventListener('submit', async (e) => {
-                            e.preventDefault();
-
-                            const submitButton = form.querySelector('button[type="submit"]');
-                            if (!submitButton) return;
-
-                            try {
-                                // Deshabilitar botón durante el envío
-                                (submitButton as HTMLButtonElement).disabled = true;
-                                submitButton.classList.add('opacity-50', 'cursor-not-allowed');
-
-                                // Limpiar estado anterior
-                                formStatus.innerHTML = '';
-                                formStatus.classList.add('hidden');
-
-                                // Envío de formulario
-                                const response = await fetch(form.getAttribute('action') || '', {
-                                    method: 'POST',
-                                    body: new FormData(form as HTMLFormElement),
-                                    headers: {
-                                        'Accept': 'application/json'
-                                    }
-                                });
-
-                                const result = await response.json();
-
-                                // Manejo de respuesta
-                                if (response.ok) {
-                                    formStatus.innerHTML = `
-                                        <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative" role="alert">
-                                            ¡Mensaje enviado con éxito! Nos pondremos en contacto pronto.
-                                        </div>
-                                    `;
-                                    formStatus.classList.remove('hidden');
-                                    (form as HTMLFormElement).reset();
-                                } else {
-                                    formStatus.innerHTML = `
-                                        <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
-                                            Hubo un problema al enviar el mensaje. Por favor, inténtalo de nuevo.
-                                        </div>
-                                    `;
-                                    formStatus.classList.remove('hidden');
-                                }
-                            } catch (error) {
-                                // Manejo de errores de conexión
-                                formStatus.innerHTML = `
-                                    <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
-                                        Error de conexión. Verifica tu internet e inténtalo de nuevo.
-                                    </div>
-                                `;
-                                formStatus.classList.remove('hidden');
-                            } finally {
-                                // Rehabilitar botón
-                                (submitButton as HTMLButtonElement).disabled = false;
-                                submitButton.classList.remove('opacity-50', 'cursor-not-allowed');
-                            }
-                        });
-                    });
-                </script>
             </div>
             <div class="flex flex-col justify-center items-center space-y-8">
                 <div class="text-center">
-                    <h3 class="text-2xl font-bold mb-4 text-gray-800">Síguenos</h3>
-                    <div class="flex justify-center space-x-6">
+                    <h3 class="text-2xl font-bold mb-4 text-eerie_black-500">
+                        Síguenos
+                    </h3>
+                    <div class="flex space-x-4 items-center justify-center">
                         <a 
-                            href="https://facebook.com" 
-                            target="_blank" 
+                            href="https://www.facebook.com/tu_pagina" 
+                            target="_blank"
                             rel="noopener noreferrer"
-                            class="text-gray-700 hover:text-blue-600 transition duration-300"
+                            class="text-eerie_black-500 hover:text-blue-600 transition duration-300"
                         >
-                            <svg class="w-8 h-8" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                                <path d="M14 9h3l-.5 3H14v7h-3v-7H8V9h3V6.5A3.5 3.5 0 0 1 14.5 3h3v3h-3a.5.5 0 0 0-.5.5V9z"/>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" class="w-8 h-8">
+                                <path d="M12 0c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm3 8h-1.35c-.538 0-.65.221-.65.778v1.222h2l-.209 2h-1.791v7h-3v-7h-2v-2h2v-2.308c0-1.769.931-2.692 3.029-2.692h1.971v3z"/>
                             </svg>
                         </a>
                         <a 
-                            href="https://instagram.com" 
-                            target="_blank" 
+                            href="https://www.instagram.com/tu_cuenta" 
+                            target="_blank"
                             rel="noopener noreferrer"
-                            class="text-gray-700 hover:text-pink-600 transition duration-300"
+                            class="text-eerie_black-500 hover:text-pink-600 transition duration-300"
                         >
-                            <svg class="w-8 h-8" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                                <path d="M16 11.5a4 4 0 1 1-8 0 4 4 0 0 1 8 0z"/>
-                                <path d="M3 8.5V5.8A2.8 2.8 0 0 1 5.8 3h12.4A2.8 2.8 0 0 1 21 5.8v12.4a2.8 2.8 0 0 1-2.8 2.8H5.8A2.8 2.8 0 0 1 3 18.2V8.5z"/>
-                                <line x1="17" y1="6.5" x2="17.01" y2="6.5"/>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" class="w-8 h-8">
+                                <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.148 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.148-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.197-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
                             </svg>
                         </a>
                         <a 
                             href="https://wa.me/+5493416123456" 
-                            target="_blank" 
+                            target="_blank"
                             rel="noopener noreferrer"
-                            class="text-gray-700 hover:text-green-600 transition duration-300"
+                            class="text-eerie_black-500 hover:text-green-600 transition duration-300"
                         >
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50" class="w-8 h-8" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                                <path d="M 25 2 C 12.309534 2 2 12.309534 2 25 C 2 29.079097 3.1186875 32.88588 4.984375 36.208984 L 2.0371094 46.730469 A 1.0001 1.0001 0 0 0 3.2402344 47.970703 L 14.210938 45.251953 C 17.434629 46.972929 21.092591 48 25 48 C 37.690466 48 48 37.690466 48 25 C 48 12.309534 37.690466 2 25 2 z M 25 4 C 36.609534 4 46 13.390466 46 25 C 46 36.609534 36.609534 46 25 46 C 21.278025 46 17.792121 45.029635 14.761719 43.333984 A 1.0001 1.0001 0 0 0 14.033203 43.236328 L 4.4257812 45.617188 L 7.0019531 36.425781 A 1.0001 1.0001 0 0 0 6.9023438 35.646484 C 5.0606869 32.523592 4 28.890107 4 25 C 4 13.390466 13.390466 4 25 4 z M 16.642578 13 C 16.001539 13 15.086045 13.23849 14.333984 14.048828 C 13.882268 14.535548 12 16.369511 12 19.59375 C 12 22.955271 14.331391 25.855848 14.613281 26.228516 L 14.615234 26.228516 L 14.615234 26.230469 C 14.588494 26.195329 14.973031 26.752191 15.486328 27.419922 C 15.999626 28.087653 16.717405 28.96464 17.619141 29.914062 C 19.422612 31.812909 21.958282 34.007419 25.105469 35.349609 C 26.554789 35.966779 27.698179 36.339417 28.564453 36.611328 C 30.169845 37.115426 31.632073 37.038799 32.730469 36.876953 C 33.55263 36.755876 34.456878 36.361114 35.351562 35.794922 C 36.246248 35.22873 37.12309 34.524722 37.509766 33.455078 C 37.786772 32.688244 37.927591 31.979598 37.978516 31.396484 C 38.003976 31.104927 38.007211 30.847602 37.988281 30.609375 C 37.969311 30.371148 37.989581 30.188664 37.767578 29.824219 C 37.302009 29.059804 36.774753 29.039853 36.224609 28.767578 C 35.918939 28.616297 35.048661 28.191329 34.175781 27.775391 C 33.303883 27.35992 32.54892 26.991953 32.083984 26.826172 C 31.790239 26.720488 31.431556 26.568352 30.914062 26.626953 C 30.396569 26.685553 29.88546 27.058933 29.587891 27.5 C 29.305837 27.918069 28.170387 29.258349 27.824219 29.652344 C 27.819619 29.649544 27.849659 29.663383 27.712891 29.595703 C 27.284761 29.383815 26.761157 29.203652 25.986328 28.794922 C 25.2115 28.386192 24.242255 27.782635 23.181641 26.847656 L 23.181641 26.845703 C 21.603029 25.455949 20.497272 23.711106 20.148438 23.125 C 20.171937 23.09704 20.145643 23.130901 20.195312 23.082031 L 20.197266 23.080078 C 20.553781 22.728924 20.869739 22.309521 21.136719 22.001953 C 21.515257 21.565866 21.68231 21.181437 21.863281 20.822266 C 22.223954 20.10644 22.02313 19.318742 21.814453 18.904297 L 21.814453 18.902344 C 21.828863 18.931014 21.701572 18.650157 21.564453 18.326172 C 21.426943 18.001263 21.251663 17.580039 21.064453 17.130859 C 20.690033 16.232501 20.272027 15.224912 20.023438 14.634766 L 20.023438 14.632812 C 19.730591 13.937684 19.334395 13.436908 18.816406 13.195312 C 18.298417 12.953717 17.840778 13.022402 17.822266 13.021484 L 17.820312 13.021484 C 17.450668 13.004432 17.045038 13 16.642578 13 z M 16.642578 15 C 17.028118 15 17.408214 15.004701 17.726562 15.019531 C 18.054056 15.035851 18.033687 15.037192 17.970703 15.007812 C 17.906713 14.977972 17.993533 14.968282 18.179688 15.410156 C 18.423098 15.98801 18.84317 16.999249 19.21875 17.900391 C 19.40654 18.350961 19.582292 18.773816 19.722656 19.105469 C 19.863021 19.437122 19.939077 19.622295 20.027344 19.798828 L 20.027344 19.800781 L 20.029297 19.802734 C 20.115837 19.973483 20.108185 19.864164 20.078125 19.923828 C 19.867096 20.342656 19.838461 20.445493 19.625 20.691406 C 19.29998 21.065838 18.968453 21.483404 18.792969 21.65625 C 18.639439 21.80707 18.36242 22.042032 18.189453 22.501953 C 18.016221 22.962578 18.097073 23.59457 18.375 24.066406 C 18.745032 24.6946 19.964406 26.679307 21.859375 28.347656 C 23.05276 29.399678 24.164563 30.095933 25.052734 30.564453 C 25.940906 31.032973 26.664301 31.306607 26.826172 31.386719 C 27.210549 31.576953 27.630655 31.72467 28.119141 31.666016 C 28.607627 31.607366 29.02878 31.310979 29.296875 31.007812 L 29.298828 31.005859 C 29.655629 30.601347 30.715848 29.390728 31.224609 28.644531 C 31.246169 28.652131 31.239109 28.646231 31.408203 28.707031 L 31.408203 28.708984 L 31.410156 28.708984 C 31.487356 28.736474 32.454286 29.169267 33.316406 29.580078 C 34.178526 29.990889 35.053561 30.417875 35.337891 30.558594 C 35.748225 30.761674 35.942113 30.893881 35.992188 30.894531 C 35.995572 30.982516 35.998992 31.07786 35.986328 31.222656 C 35.951258 31.624292 35.8439 32.180225 35.628906 32.775391 C 35.523582 33.066746 34.975018 33.667661 34.283203 34.105469 C 33.591388 34.543277 32.749338 34.852514 32.4375 34.898438 C 31.499896 35.036591 30.386672 35.087027 29.164062 34.703125 C 28.316336 34.437036 27.259305 34.092596 25.890625 33.509766 C 23.114812 32.325956 20.755591 30.311513 19.070312 28.537109 C 18.227674 27.649908 17.552562 26.824019 17.072266 26.199219 C 16.592866 25.575584 16.383528 25.251054 16.208984 25.021484 L 16.207031 25.019531 C 15.897202 24.609805 14 21.970851 14 19.59375 C 14 17.077989 15.168497 16.091436 15.800781 15.410156 C 16.132721 15.052495 16.495617 15 16.642578 15 z"/>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" class="w-8 h-8">
+                                <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.149-.173.198-.297.297-.495.099-.198.05-.372-.025-.521-.075-.149-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.041 1.016-1.041 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413z"/>
                             </svg>
                         </a>
                     </div>
@@ -646,4 +574,38 @@ import { Navigation, Pagination, Autoplay } from 'swiper/modules';
             </div>
         </div>
     </section>
+
+    <a 
+        href="https://wa.me/+5493416123456" 
+        class="fixed bottom-6 right-6 bg-[#660708] hover:bg-[#a4161a] text-white p-4 rounded-full shadow-2xl transform transition duration-500 hover:rotate-12 hover:scale-125 z-50"
+    >
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" class="h-10 w-10">
+            <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.149-.173.198-.297.297-.495.099-.198.05-.372-.025-.521-.075-.149-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.041 1.016-1.041 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413z"/>
+        </svg>
+    </a>
+
+    <style is:global>
+        /* Estilos globales sin animaciones */
+        a {
+            @apply text-[#161a1d] hover:text-[#e5383b] transition-all duration-500 hover:underline hover:font-bold;
+        }
+
+        /* Estilos de botones sin animaciones */
+        .btn-primary {
+            @apply bg-[#660708] hover:bg-[#ba181b] text-white font-bold py-3 px-5 rounded-lg;
+        }
+
+        /* Estilos de selección sin animaciones */
+        ::selection {
+            @apply bg-[#660708] text-[#e5383b];
+        }
+
+        /* Estilos de scrollbar sin animaciones */
+        ::-webkit-scrollbar {
+            @apply w-3 bg-[#f5f3f4];
+        }
+        ::-webkit-scrollbar-thumb {
+            @apply bg-[#660708] rounded-full hover:bg-[#a4161a];
+        }
+    </style>
 </Layout>

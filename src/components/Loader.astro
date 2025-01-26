@@ -8,94 +8,156 @@ const { fullScreen = true } = Astro.props;
 
 <div 
   id="page-loader"
-  class:list={[
-    'loader', 
-    fullScreen ? 'fixed inset-0 z-[9999] bg-white flex items-center justify-center' : ''
-  ]}
+  class="fixed inset-0 z-[9999] bg-white_smoke-500 flex items-center justify-center overflow-hidden"
+  style="position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: #f5f3f4; display: flex; justify-content: center; align-items: center; z-index: 9999; transition: opacity 0.5s ease; overflow: hidden;"
 >
-  <div class="drill-loader">
-    <div class="drill-container">
-      <div class="drill-body"></div>
-      <div class="drill-bit"></div>
+  <div class="loader-container">
+    <div class="loader-content">
+      <div class="loader-dot"></div>
+      <div class="loader-text">LCA Amoblamientos</div>
     </div>
   </div>
 </div>
 
-<style>
-.loader {
-  background-color: white;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  height: 100%;
-}
-
-.drill-loader {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 200px;
-  height: 200px;
-}
-
-.drill-container {
-  position: relative;
-  width: 100px;
-  height: 150px;
-}
-
-.drill-body {
-  position: absolute;
-  bottom: 0;
-  left: 25px;
-  width: 50px;
-  height: 100px;
-  background-color: #333;
-  border-radius: 10px 10px 0 0;
-  animation: drill-shake 0.1s infinite alternate;
-}
-
-.drill-bit {
-  position: absolute;
-  top: -30px;
-  left: 40px;
-  width: 20px;
-  height: 40px;
-  background-color: #FF6B00;
-  clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
-  animation: spin 0.3s linear infinite;
-}
-
-@keyframes spin {
-  0% {
-    transform: rotate(0deg);
-  }
-  100% {
-    transform: rotate(360deg);
-  }
-}
-
-@keyframes drill-shake {
-  0% {
-    transform: translateX(-2px);
-  }
-  100% {
-    transform: translateX(2px);
-  }
-}
-</style>
-
-<script is:inline>
-  document.addEventListener('DOMContentLoaded', () => {
+<script>
+  function showLoader() {
     const loader = document.getElementById('page-loader');
     if (loader) {
-      window.addEventListener('load', () => {
-        loader.classList.add('opacity-0');
-        setTimeout(() => {
-          loader.style.display = 'none';
-        }, 500);
+      loader.style.opacity = '1';
+      loader.style.visibility = 'visible';
+      // Prevent body scroll
+      document.documentElement.style.overflow = 'hidden';
+      document.body.style.overflow = 'hidden';
+    }
+  }
+
+  function hideLoader() {
+    const loader = document.getElementById('page-loader');
+    if (loader) {
+      loader.style.opacity = '0';
+      setTimeout(() => {
+        loader.style.visibility = 'hidden';
+        // Restore body scroll
+        document.documentElement.style.overflow = 'auto';
+        document.body.style.overflow = 'auto';
+      }, 500);
+    }
+  }
+
+  function scrollToHero() {
+    const heroSection = document.getElementById('inicio');
+    if (heroSection) {
+      // Reiniciar scroll a la posición inicial
+      window.scrollTo({
+        top: 0,
+        left: 0,
+        behavior: 'instant'
+      });
+      
+      // Desplazamiento suave al hero
+      heroSection.scrollIntoView({ 
+        behavior: 'smooth',
+        block: 'start'
       });
     }
+  }
+
+  function resetPageState() {
+    // Reiniciar completamente el estado de la página
+    showLoader();
+    scrollToHero();
+    setTimeout(hideLoader, 1000);
+  }
+
+  // Eventos para reiniciar el estado en diferentes escenarios
+  window.addEventListener('load', resetPageState);
+  window.addEventListener('pageshow', resetPageState);
+  window.addEventListener('popstate', resetPageState);
+
+  // Manejar recarga manual (F5 o botón de recarga)
+  if (performance.navigation.type === 1) {
+    resetPageState();
+  }
+
+  // Listener para asegurar reinicio en navegaciones
+  document.addEventListener('DOMContentLoaded', () => {
+    // Prevenir que la página mantenga la posición de scroll anterior
+    if ('scrollRestoration' in history) {
+      history.scrollRestoration = 'manual';
+    }
+    
+    resetPageState();
   });
 </script>
+
+<style is:global>
+  html, body {
+    max-width: 100%;
+    max-height: 100%;
+    overflow: hidden;
+    margin: 0;
+    padding: 0;
+  }
+
+  #page-loader {
+    background: #f5f3f4;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 9999;
+    transition: opacity 0.5s ease;
+    overflow: hidden;
+  }
+
+  .loader-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+  }
+
+  .loader-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    width: 100%;
+    text-align: center;
+  }
+
+  .loader-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background-color: #ba181b;
+    animation: pulse 1s ease-in-out infinite;
+  }
+
+  .loader-text {
+    font-size: 14px;
+    font-weight: bold;
+    color: #161a1d;
+    opacity: 0.8;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  @keyframes pulse {
+    0%, 100% { 
+      transform: scale(0.6);
+      opacity: 0.5;
+    }
+    50% { 
+      transform: scale(1);
+      opacity: 1;
+    }
+  }
+</style>
