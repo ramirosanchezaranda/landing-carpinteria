@@ -23,7 +23,7 @@ const {
 ---
 
 <!doctype html>
-<html lang="es">
+<html lang="es" class="h-full">
     <head>
         {/* Metadatos y configuraciones principales del documento */}
         <meta charset="UTF-8" />
@@ -105,12 +105,29 @@ const {
         </script>
     </head>
     
-    <body class="bg-white_smoke-500 backdrop-blur-xl text-eerie_black-500 min-h-screen font-sans">
-        <Loader />       
-        {/* Slot para contenido dinámico de páginas */}
-        <slot />                
+    <body class="flex flex-col min-h-screen bg-white_smoke-500 text-eerie_black-500 font-sans">
+        <Loader />
+        <main class="flex-1">
+            <slot />
+        </main>
+        <footer class="w-full bg-eerie_black-500 text-white py-6 mt-auto">
+            <div class="container mx-auto px-4">
+                <div class="flex flex-col md:flex-row justify-between items-center gap-4">
+                    <div class="text-center md:text-left">
+                        <p class="text-sm">&copy; {new Date().getFullYear()} LCA Carpintería. Todos los derechos reservados.</p>
+                    </div>
+                    <div class="flex items-center space-x-6">
+                        <a href="#inicio" class="text-white hover:text-gray-300 transition-colors duration-300">
+                            Inicio
+                        </a>
+                        <a href="#contacto" class="text-white hover:text-gray-300 transition-colors duration-300">
+                            Contacto
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </footer>
         
-
         {/* Carga de scripts externos */}
         <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
         
